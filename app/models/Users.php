@@ -56,7 +56,7 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->setSchema("phalcon_admin");
+        $this->setSchema($_ENV['DB_SCHEMA']);
         $this->setSource("users");
     }
 

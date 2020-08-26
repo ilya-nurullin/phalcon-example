@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65523fa7ab735b6dd4e55e5eb6b324da",
+    "content-hash": "ca0f4fc8522eb1bb670131a6a7e1c56c",
     "packages": [
         {
             "name": "josegonzalez/dotenv",
@@ -1436,7 +1436,11 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-phalcon": "^4.0"
+        "php": "^7.4",
+        "ext-phalcon": "^4.0",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-openssl": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

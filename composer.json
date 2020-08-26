@@ -4,7 +4,11 @@
         "phalcon/migrations": "^1.2"
     },
     "require": {
+        "php": "^7.4",
         "josegonzalez/dotenv": "dev-master",
-        "ext-phalcon": "^4.0"
+        "ext-phalcon": "^4.0",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-openssl": "*"
     }
 }

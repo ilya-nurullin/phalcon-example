@@ -8,13 +8,13 @@ defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirn
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config([
-    'database' => [
-        'adapter'     => $_ENV['DB_ADAPTER'],
-        'host'        => $_ENV['DB_HOST'],
-        'username'    => $_ENV['DB_USER'],
-        'password'    => $_ENV['DB_PASS'],
-        'dbname'      => $_ENV['DB_NAME'],
-        'charset'     => 'utf8',
+    'database'    => [
+        'adapter'  => $_ENV['DB_ADAPTER'],
+        'host'     => $_ENV['DB_HOST'],
+        'username' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASS'],
+        'dbname'   => $_ENV['DB_NAME'],
+        'charset'  => 'utf8',
     ],
     'application' => [
         'appDir'         => APP_PATH . '/',
@@ -26,5 +26,5 @@ return new \Phalcon\Config([
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/',
-    ]
+    ],
 ]);
