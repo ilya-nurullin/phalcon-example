@@ -3,4 +3,8 @@
 # IntelliJ project files
 .idea
 *.iml
+cache
+vendor
 
+.env
+.phalcon

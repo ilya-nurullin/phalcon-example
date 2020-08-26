@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "phalcon/devtools": "^4.0",
+        "phalcon/migrations": "^1.2"
+    },
+    "require": {
+        "josegonzalez/dotenv": "dev-master",
+        "ext-phalcon": "^4.0"
+    }
+}

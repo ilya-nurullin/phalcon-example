@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Phalcon\Acl\Adapter\Memory;
+use Phalcon\Acl\Enum;
 use Phalcon\Escaper;
 use Phalcon\Flash\Direct as Flash;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
@@ -14,6 +16,7 @@ use Phalcon\Url as UrlResolver;
 /**
  * Shared configuration service
  */
+/** @var Phalcon\Di\FactoryDefault $di */
 $di->setShared('config', function () {
     return include APP_PATH . "/config/config.php";
 });
@@ -41,19 +44,19 @@ $di->setShared('view', function () {
     $view->setViewsDir($config->application->viewsDir);
 
     $view->registerEngines([
-        '.volt' => function ($view) {
+        '.volt'  => function ($view) {
             $config = $this->getConfig();
 
             $volt = new VoltEngine($view, $this);
 
             $volt->setOptions([
-                'path' => $config->application->cacheDir,
-                'separator' => '_'
+                'path'      => $config->application->cacheDir,
+                'separator' => '_',
             ]);
 
             return $volt;
         },
-        '.phtml' => PhpEngine::class
+        '.phtml' => PhpEngine::class,
 
     ]);
 
@@ -72,7 +75,7 @@ $di->setShared('db', function () {
         'username' => $config->database->username,
         'password' => $config->database->password,
         'dbname'   => $config->database->dbname,
-        'charset'  => $config->database->charset
+        'charset'  => $config->database->charset,
     ];
 
     if ($config->database->adapter == 'Postgresql') {
@@ -101,7 +104,7 @@ $di->set('flash', function () {
         'error'   => 'alert alert-danger',
         'success' => 'alert alert-success',
         'notice'  => 'alert alert-info',
-        'warning' => 'alert alert-warning'
+        'warning' => 'alert alert-warning',
     ]);
 
     return $flash;
@@ -120,3 +123,28 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+$di->setShared('acl', function () {
+    $acl = new Memory();
+
+    $acl->setDefaultAction(Enum::DENY);
+
+    $acl->addRole('user');
+    $acl->addRole('guest');
+
+    $acl->addComponent('admin', ['dashboard']);
+    $acl->addComponent('auth', ['register', 'login', 'checkLogin', 'registerForm', 'loginForm', 'logOut']);
+    $acl->addComponent('index', ['index']);
+
+    $acl->allow('guest', 'auth', ['register', 'checkLogin', 'registerForm', 'loginForm']);
+    $acl->allow('user', 'admin', '*');
+    $acl->allow('user', 'auth', ['logOut']);
+
+    $acl->allow('*', 'index', '*');
+
+    return $acl;
+});
+
+$di->get('dispatcher')->setEventsManager($di->get('eventsManager'));
+
+require_once 'eventListeners.php';
