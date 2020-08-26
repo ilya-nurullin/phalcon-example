@@ -11,7 +11,8 @@ define('APP_PATH', BASE_PATH . '/app');
 require_once "../vendor/autoload.php";
 
 try {
-    $envLoader = (new josegonzalez\Dotenv\Loader(BASE_PATH . '/.env'))->parse()->toEnv(true);
+    if (file_exists(BASE_PATH . '/.env'))
+        $envLoader = (new josegonzalez\Dotenv\Loader(BASE_PATH . '/.env'))->parse()->toEnv(true);
 
     /**
      * The FactoryDefault Dependency Injector automatically registers
