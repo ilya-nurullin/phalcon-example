@@ -7,6 +7,9 @@
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
+if (file_exists(BASE_PATH . '/.env'))
+    $envLoader = (new josegonzalez\Dotenv\Loader(BASE_PATH . '/.env'))->parse()->toEnv(true);
+
 return new \Phalcon\Config([
     'database'    => [
         'adapter'  => $_ENV['DB_ADAPTER'],

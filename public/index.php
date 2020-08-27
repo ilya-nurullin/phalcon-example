@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Phalcon\Di\FactoryDefault;
 
 error_reporting(E_ALL);
-ini_set("display_errors", '1');
 
 define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
@@ -12,9 +11,6 @@ define('APP_PATH', BASE_PATH . '/app');
 require_once "../vendor/autoload.php";
 
 try {
-    if (file_exists(BASE_PATH . '/.env'))
-        $envLoader = (new josegonzalez\Dotenv\Loader(BASE_PATH . '/.env'))->parse()->toEnv(true);
-
     /**
      * The FactoryDefault Dependency Injector automatically registers
      * the services that provide a full stack framework.
