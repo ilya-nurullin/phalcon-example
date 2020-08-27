@@ -51,7 +51,7 @@ class UsersMigration_100 extends Migration
                     new Column(
                         'age',
                         [
-                            'type' => Column::TYPE_TINYINTEGER,
+                            'type' => Column::TYPE_INTEGER, // Column::TYPE_TINYINTEGER does not work for postgresql
                             'unsigned' => true,
                             'notNull' => true,
                             'size' => 1,
